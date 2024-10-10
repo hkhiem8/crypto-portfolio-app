@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-    userId: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        unique: true,
-    },
+    // userId: {
+    //     type: Schema.Types.ObjectId,
+    //     required: true,
+    //     unique: true,
+    // },
     username: {
         type: String,
         required: true,
         unique: true,
     },
-    passwordHash: {
+    hashedPassword: {
         type: String,
         required: true,
     },
