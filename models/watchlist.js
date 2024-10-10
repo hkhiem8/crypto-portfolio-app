@@ -9,10 +9,15 @@ const watchlistSchema = new Schema({
     description: {
         type: String
     },
-    tokens: [{
+    coins: [{
         type: Schema.Types.ObjectId,  // Reference to the cryptocurrencies in this watchlist
-        ref: 'Token'
+        ref: 'Coin'
     }],
+    userId: {
+        type: Schema.Types.ObjectId,  // Reference to the user who owns this watchlist
+        ref: 'User',
+        required: true
+    },
     updatedAt: {
         type: Date,
         default: Date.now

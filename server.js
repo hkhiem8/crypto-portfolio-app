@@ -4,14 +4,17 @@ const app = express();
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const usersRouter = require('./controllers/users');
-const profilesRouter = require('./controllers/profiles');
-const tokensRouter = require('./controllers/tokens');
+const coinsRouter = require('./controllers/coins');
+const watchlistsRouter = require('./controllers/watchlists');
+const cors = require('cors');
+
 const MONGO_URI = process.env.MONGO_URI
 
 
 const port = process.env.PORT ? process.env.PORT : "3000";
 
 app.use(express.json())
+app.use(cors())
 
 mongoose.connect(MONGO_URI);
 
@@ -24,8 +27,8 @@ mongoose.connection.on("error", () => {
 });
 
 app.use('/users', usersRouter);
-app.use('/profiles', profilesRouter);
-app.use('/tokens', tokensRouter);
+app.use('/coins', coinsRouter);
+app.use('/watchlists', watchlistsRouter);
 
 app.listen(port, () => {
     console.log(`app is ready on port ${port}!`);

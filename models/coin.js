@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const tokenSchema = new mongoose.Schema({
-    tokenId: {
+const coinSchema = new mongoose.Schema({
+    coinId: {
         type: String,
         required: true,
         unique: true
@@ -29,6 +29,6 @@ const tokenSchema = new mongoose.Schema({
 },
 );
 
-const Token = mongoose.model("Token", tokenSchema);
+const Coin = mongoose.model("Coin", tokenSchema);
 
-module.exports = Token;
+module.exports = Coin;
