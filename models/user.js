@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -14,7 +13,7 @@ const userSchema = new mongoose.Schema({
     watchlist: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "watchlist",
+            ref: "Watchlist",
         },
     ],
 },

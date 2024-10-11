@@ -9,7 +9,7 @@ router.post('/', verifyToken, async (req, res) => {
         const newWatchlist = new Watchlist({
             name: req.body.name,
             description: req.body.description,
-            coins: req.body.coins,
+            coins: req.body.coins, // idea is that it returns the object with all coin data, filtered in FE
             userId: req.user._id,
         });
         await newWatchlist.save();
@@ -19,8 +19,47 @@ router.post('/', verifyToken, async (req, res) => {
     }
 });
 
+
+// Add coins to the watchlist by mongoDB ID
+router.patch('/:id/add-coin', verifyToken, async (req, res) => {
+    try {
+        const newCoins = req.body.coins; // not sure
+
+        const watchlist = await Watchlist.findOne({ _id: req.params.id, userId: req.user._id });
+
+        newCoins.forEach(coin => {
+            if (!watchlist.coins.includes(coin)) {
+                watchlist.coins.push(coin);
+            }
+        });
+
+        await watchlist.save();
+
+        res.status(201).json({ message: 'Coin added to watchlist', watchlist });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Remove coins from the watchlist by mongoDB ID
+router.patch('/:id/remove-coin', verifyToken, async (req, res) => {
+    try {
+        const olcCoins = req.body.coins;
+
+        const watchlist = await Watchlist.findOne({ _id: req.params.id, userId: req.user._id });
+
+        if (watchlist.coins.includes(oldCoin)) {
+            watchlist.coins = watchlist.coins.filter(coin => coin !== oldCoin);
+            await watchlist.save();
+            res.status(200).json({ message: 'Coin removed from watchlist', watchlist });
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
 // Get all watchlists for the logged-in user
-router.get('/', verifyToken, async (req, res) => {
+router.get('/:user', verifyToken, async (req, res) => {
     try {
         const watchlists = await Watchlist.find({ userId: req.user._id }).populate('coins');
         res.status(200).json({ watchlists });

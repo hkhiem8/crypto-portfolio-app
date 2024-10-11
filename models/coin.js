@@ -29,6 +29,6 @@ const coinSchema = new mongoose.Schema({
 },
 );
 
-const Coin = mongoose.model("Coin", tokenSchema);
+const Coin = mongoose.model("Coin", coinSchema);
 
 module.exports = Coin;

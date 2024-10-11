@@ -18,11 +18,9 @@ const watchlistSchema = new Schema({
         ref: 'User',
         required: true
     },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
-});
+},
+{ timestamps: true }
+);
 
 const Watchlist = mongoose.model('Watchlist', watchlistSchema);
 
