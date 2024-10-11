@@ -19,11 +19,11 @@ const coinSchema = new mongoose.Schema({
         required: true,
     },
     currentPriceUSD: {
-        type: number,
+        type: Number,
         required: true,
     },
     priceChange24Hrs: {
-        type: number,
+        type: Number,
         required: true,
     },
 },

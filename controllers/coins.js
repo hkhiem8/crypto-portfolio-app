@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Coin = require('../models/coin');
 const jwt = require('jsonwebtoken');
-const fetch = require('node-fetch');
 const verifyToken = require('../middleware/verify-token');
 const UNIBLOCK_API_KEY = process.env.UNIBLOCK_API_KEY
 
@@ -37,8 +36,9 @@ router.get('/getdetails', verifyToken, async (req, res) => {
 });
 
 // Add/or update coins
-router.post('add-coin', async (req, res) => {
+router.post('/add-coin', async (req, res) => {
     try {
+        
         const coinId = req.body.coinId;
 
         const response = await fetch(`https://api.uniblock.dev/direct/v1/CoinGecko/coins/${coinId}`,

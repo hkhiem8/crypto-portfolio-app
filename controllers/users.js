@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../middleware/verify-token');
 
 const SALT_LENGTH = 12;
 
