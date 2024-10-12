@@ -28,7 +28,7 @@ router.get('/getdetails', verifyToken, async (req, res) => {
             };
             res.status(200).send({ coinDetails });
         } else {
-            res.status(400).json({ error: 'Error fetching coin data from UniBlock API' });
+            res.status(400).json({ error: 'Error fetching coin data from Uniblock API' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -73,7 +73,7 @@ router.post('/add-coin', async (req, res) => {
                 res.status(201).json({ message: 'Coin added to database', coin: newCoin });
             }
         } else {
-            res.status(400).json({ error: 'Error fetching coin data from UniBlock API' });
+            res.status(400).json({ error: 'Error fetching coin data from Uniblock API' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -83,7 +83,6 @@ router.post('/add-coin', async (req, res) => {
 // Index - view all coins in the database
 router.get('/coins', async (req, res) => {
     try {
-        // Retrieve all coins from the database
         const coins = await Coin.find({});
         res.status(200).json({ coins });
     } catch (error) {
