@@ -1,23 +1,24 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     username: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     hashedPassword: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     watchlist: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Watchlist",
-        },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Watchlist",
+      },
     ],
-},
-    { timestamps: true }
+  },
+  { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
