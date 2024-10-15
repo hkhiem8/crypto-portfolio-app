@@ -50,16 +50,18 @@ router.patch("/:id/remove-coin", verifyToken, async (req, res) => {
   try {
     const oldCoins = req.body.coins;
 
-    const watchlist = await Watchlist.findOne({
+    let watchlist = await Watchlist.findOne({
       _id: req.params.id,
       userId: req.user._id,
-    });
+    })
+
 
     watchlist.coins = watchlist.coins.filter(
       (coin) => !oldCoins.includes(coin.toString())
     );
 
     await watchlist.save();
+
     res.status(200).json({ message: "Coin removed from watchlist", watchlist });
   } catch (error) {
     res.status(400).json({ error: error.message });
