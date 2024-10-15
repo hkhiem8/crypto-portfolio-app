@@ -9,13 +9,13 @@ router.post("/", verifyToken, async (req, res) => {
     const newWatchlist = new Watchlist({
       name: req.body.name,
       description: req.body.description,
-      coins: req.body.coins,
+      coins: req.body.coins || [],
       userId: req.user._id,
     });
     await newWatchlist.save();
     res
       .status(201)
-      .json({ message: "Watchlist created", watchlist: newWatchlist });
+      .json(newWatchlist);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -72,7 +72,7 @@ router.get("/", verifyToken, async (req, res) => {
     const watchlists = await Watchlist.find({ userId: req.user._id }).populate(
       "coins"
     );
-    res.status(200).json({ watchlists });
+    res.status(200).json( watchlists || [] );
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -87,7 +87,7 @@ router.get("/:id", verifyToken, async (req, res) => {
         .status(404)
         .json({ error: "Watchlist not found or unauthorized" });
     }
-    res.status(200).json({ watchlist });
+    res.status(200).json(watchlist);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
