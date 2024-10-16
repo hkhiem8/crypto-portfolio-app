@@ -74,7 +74,7 @@ router.get("/", verifyToken, async (req, res) => {
     const watchlists = await Watchlist.find({ userId: req.user._id }).populate(
       "coins"
     );
-    res.status(200).json( watchlists || [] );
+    res.status(200).json(watchlists || []);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

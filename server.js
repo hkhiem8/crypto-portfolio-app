@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const usersRouter = require("./controllers/users");
 const coinsRouter = require("./controllers/coins");
